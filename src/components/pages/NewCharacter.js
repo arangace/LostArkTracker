@@ -5,6 +5,7 @@ import { Formik, Form } from 'formik'
 import { Typography, TextField, Button, Slider, Box, Modal } from '@mui/material'
 import { AppContext } from '../../AppContextProvider'
 import { LoginPrompt } from './LoginPrompt'
+import { Navigate } from "react-router-dom";
 const NewCharacter = () => {
     const [CDRB, setCDRB] = useState(0)
     const [GRRB, setGRRB] = useState(0)
@@ -12,6 +13,7 @@ const NewCharacter = () => {
     const [itemLevel, setitemLevel] = useState()
     const [characterName, setcharacterName] = useState("")
     const [successModal, setsuccessModal] = useState(false)
+    const [redirect, setredirect] = useState(false)
     const { account } = useContext(AppContext)
 
     const modalStyles = {
@@ -53,6 +55,7 @@ const NewCharacter = () => {
     }
     const update = async (character) => {
         setsuccessModal(true)
+
         try {
 
             await fetch(`https://122.57.82.179:8080/ark/Addcharacters/${account}`,
@@ -67,8 +70,10 @@ const NewCharacter = () => {
         catch (e) {
             console.log(e)
         }
+        setredirect(true)
         setTimeout(() => {
             handlesuccessModal()
+            setredirect(false)
         }, 2000);
     }
     const handleAdd = (values) => {
@@ -179,6 +184,7 @@ const NewCharacter = () => {
                 </Box>
             </div>
                 : <LoginPrompt />}
+            {((redirect) && <Navigate to="/tracker" />)}
         </>
 
     )
