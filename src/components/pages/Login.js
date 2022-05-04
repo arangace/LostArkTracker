@@ -12,6 +12,7 @@ export const Login = (props) => {
   const [signUpDetails, setSignUpDetails] = useState()
   const handleSubmit = async () => {
     try {
+      console.log(userName)
       const response = await fetch(`https://122.57.82.179:8080/ark/Getaccount/${userName}`);
       const data = await response.json();
       localStorage.setItem('currentAccount', data.id)
@@ -98,7 +99,8 @@ export const Login = (props) => {
                 <Button variant="contained" color="secondary" onClick={handleSignUp}>Sign Up</Button>
               </Form>
             </Formik>
-            {((account || signUp) && <Navigate to="/tracker" />)}
+            {((account) && <Navigate to="/tracker" />)}
+            {signUp && <Navigate to='/' />}
           </div>
         </Box>
       </div>
