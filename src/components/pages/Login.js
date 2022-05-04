@@ -98,7 +98,7 @@ export const Login = (props) => {
                 <Button variant="contained" color="secondary" onClick={handleSignUp}>Sign Up</Button>
               </Form>
             </Formik>
-            {((account || signUp) && <Navigate to="/" />)}
+            {((account || signUp) && <Navigate to="/tracker" />)}
           </div>
         </Box>
       </div>

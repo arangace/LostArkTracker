@@ -107,7 +107,7 @@ const NewCharacter = () => {
 
                 </Box>
             </Modal>
-            {account ? <div className={styles.page}>NewCharacter
+            {account ? <div className={styles.page}>
                 <Box sx={{ minWidth: 200 }}>
 
                     <Formik
@@ -129,6 +129,9 @@ const NewCharacter = () => {
                                     Item Level:
                                 </Typography>
                                 <TextField onChange={handleItemLevel} value={itemLevel} id="outlined-basic" label="Item Level" variant="outlined" />
+                                <Typography id="item-level" variant="h6" component="h6" gutterBottom>
+                                    Chaos dungeon rest bonus
+                                </Typography>
                                 <Slider
                                     aria-label="chaosRestBonus"
                                     defaultValue={0}
@@ -139,6 +142,9 @@ const NewCharacter = () => {
                                     min={0}
                                     max={100}
                                 />
+                                <Typography id="item-level" variant="h6" component="h5" gutterBottom>
+                                    Guardian raid rest bonus
+                                </Typography>
                                 <Slider
                                     aria-label="guardianRestBonus"
                                     defaultValue={0}
@@ -149,6 +155,9 @@ const NewCharacter = () => {
                                     min={0}
                                     max={100}
                                 />
+                                <Typography id="item-level" variant="h6" component="h5" gutterBottom>
+                                    Una's tasks rest bonus
+                                </Typography>
                                 <Slider
                                     aria-label="unaRestBonus"
                                     defaultValue={0}
@@ -159,7 +168,7 @@ const NewCharacter = () => {
                                     min={0}
                                     max={100}
                                 />
-                                <Typography id="todays-clears" variant="h5" component="h5">
+                                <Typography id="todays-clears" variant="h6" component="h5">
                                     Todays Clears:
                                 </Typography>
                                 <ClearCount />
