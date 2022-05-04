@@ -6,7 +6,7 @@ import ModalForm from "./ModalComponents/ModalForm";
 import RestBonusBar from "./RestBonusBar";
 import DoneModal from "./ModalComponents/DoneModal";
 import { LoginPrompt } from "./LoginPrompt";
-
+import Loading from './Loading'
 
 export const TrackerPage = () => {
   const { account, setAccount, setModal, currentCharacter, setcurrentCharacter, isLoading, setIsLoading, version } = useContext(AppContext)
@@ -106,7 +106,7 @@ export const TrackerPage = () => {
           <Box sx={{ width: '100%' }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
-              {isLoading ? <p>Loading..</p> : characters.map((character) => (
+              {isLoading ? <Loading /> : characters.map((character) => (
                 <Grid item xs={{ width: '30%' }}>
                   <Card className={styles.card} onClick={() => handleCharacterClick(character)} variant="outlined">
                     <CardContent>

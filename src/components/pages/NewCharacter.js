@@ -54,11 +54,9 @@ const NewCharacter = () => {
         console.log(characterName)
     }
     const update = async (character) => {
-        setsuccessModal(true)
-
         try {
 
-            await fetch(`https://122.57.82.179:8080/ark/Addcharacters/${account}`,
+            const response = await fetch(`https://122.57.82.179:8080/ark/Addcharacters/${account}`,
                 {
                     method: 'POST',
                     headers: {
@@ -66,15 +64,26 @@ const NewCharacter = () => {
                     },
                     body: JSON.stringify(character)
                 });
+            const data = await response.json()
+            console.log(data.status)
+            if ((data.status > 200) && (data.status < 300)) {
+                setsuccessModal(true)
+                setredirect(true)
+                setTimeout(() => {
+                    handlesuccessModal()
+                    setredirect(false)
+                }, 2000);
+            }
+            else {
+                alert("Error creating character")
+                throw new Error();
+            }
+
         }
         catch (e) {
             console.log(e)
         }
-        setredirect(true)
-        setTimeout(() => {
-            handlesuccessModal()
-            setredirect(false)
-        }, 2000);
+
     }
     const handleAdd = (values) => {
 

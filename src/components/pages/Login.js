@@ -13,7 +13,16 @@ export const Login = (props) => {
   const handleSubmit = async () => {
     try {
       console.log(userName)
-      const response = await fetch(`https://122.57.82.179:8080/ark/Getaccount/${userName}`);
+
+      const response = await fetch(`https://122.57.82.179:8080/ark/Getaccount/${userName}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '
+          }
+        })
+
       const data = await response.json();
       localStorage.setItem('currentAccount', data.id)
       setAccount(localStorage.getItem('currentAccount'))
