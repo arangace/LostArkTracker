@@ -8,7 +8,8 @@ import { AppContext } from "../../AppContextProvider";
 export const Login = (props) => {
   const [userName, setUserName] = useState("");
   const { account, setAccount } = useContext(AppContext)
-
+  const [signUp, setsignUp] = useState(false)
+  const [signUpDetails, setSignUpDetails] = useState()
   const handleSubmit = async () => {
     try {
       const response = await fetch(`https://122.57.82.179:8080/ark/Getaccount/${userName}`);
@@ -21,17 +22,41 @@ export const Login = (props) => {
       alert(`User${userName} not found`)
       console.log(e)
     }
-
   };
   const handleUserName = (e) => {
     e.preventDefault()
     setUserName(e.target.value)
-
   }
+  const handleSignUpName = (e) => {
+    e.preventDefault()
+    setSignUpDetails(e.target.value)
+  }
+  const handleSignUp = async () => {
+    console.log(signUpDetails)
+    let newAccount = { name: signUpDetails }
+    try {
+      await fetch(`https://122.57.82.179:8080/ark/Addaccount/`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newAccount)
+        });
+      setsignUp(true)
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
+  useEffect(() => {
+    setsignUp(false)
+  }, [])
+
   return (
     <div className={styles.page}>
       <div>
-        <h1>Login</h1>
+        <h2>Login</h2>
         <Box
           sx={{
             "& > :not(style)": { m: 1, width: "25ch" },
@@ -44,18 +69,36 @@ export const Login = (props) => {
                 }}
               onSubmit={handleSubmit}
             >
-              <Form>
+              <Form sx={{ display: "flex", justifyContent: "space-between" }}>
                 <TextField
                   id="outlined-basic"
                   label="Username"
                   variant="outlined"
                   onChange={handleUserName}
                 />
-                <Button variant="contained" type="submit">Login</Button>
-                {(account) && <Navigate to="/" />}
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Button variant="contained" type="submit">Login</Button>
+                </Box>
               </Form>
             </Formik>
+            <h2>Or..</h2>
+            <h2>Sign Up</h2>
+            <Formik
+              onSubmit={handleSignUp}
+            >
+              <Form>
 
+
+                <TextField
+                  id="outlined-basic"
+                  label="Username"
+                  variant="outlined"
+                  onChange={handleSignUpName}
+                />
+                <Button variant="contained" color="secondary" onClick={handleSignUp}>Sign Up</Button>
+              </Form>
+            </Formik>
+            {((account || signUp) && <Navigate to="/" />)}
           </div>
         </Box>
       </div>

@@ -18,13 +18,12 @@ export const Navbar = () => {
       <ul className={styles["sub-nav"]}>
         <h1>
           {account ? <Link onClick={handleLogout} to="/">Logout</Link> : <Link to="/login">Login</Link>}
-
         </h1>
         <h1>
           <Link to="/tracker">Tracker</Link>
         </h1>
         <h1>
-          <Link to="/new">Add</Link>
+          <Link to="/new">Add Character</Link>
         </h1>
       </ul>
     </div>
