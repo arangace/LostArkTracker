@@ -95,6 +95,11 @@ export const TrackerPage = () => {
     <div className={styles.page}>
       {account ?
         <div className={styles.content}>
+          <h1>Character List</h1>
+          <h4>Tip: </h4>
+          <p> Add new users with the "Add Character" Link, view character's on this page.<br></br>Edit characters rest bonuses, guardian raid clears etc by clicking on
+            the characters card.<br></br>
+            Click "Submit Update" to update all changed characters</p>
           <ModalForm character={currentCharacter} />
           <DoneModal modal={doneModal} handleDoneModal={handleDoneModal} />
 
