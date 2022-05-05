@@ -65,19 +65,12 @@ const NewCharacter = () => {
                     body: JSON.stringify(character)
                 });
             const data = await response.json()
-            console.log(data.status)
-            if ((data.status > 200) && (data.status < 300)) {
-                setsuccessModal(true)
-                setredirect(true)
-                setTimeout(() => {
-                    handlesuccessModal()
-                    setredirect(false)
-                }, 2000);
-            }
-            else {
-                alert("Error creating character")
-                throw new Error();
-            }
+            setsuccessModal(true)
+            setredirect(true)
+            setTimeout(() => {
+                handlesuccessModal()
+                setredirect(false)
+            }, 2000);
 
         }
         catch (e) {
