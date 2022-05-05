@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Modal, Box, Typography, Button } from '@mui/material'
 import { AppContext } from '../../../AppContextProvider'
 const DeleteModal = (props) => {
-    const { setversion, version } = useContext(AppContext)
+    const { setversion, version, url } = useContext(AppContext)
     const modalStyles = {
         display: "flex",
         justifyContent: "space-around",
@@ -24,7 +24,7 @@ const DeleteModal = (props) => {
     const deleteCharacter = async () => {
         console.log(props.character.id)
         try {
-            await fetch(`https://122.57.82.179:8080/ark/Deletecharacters/${props.character.id}`,
+            await fetch(`${url}/ark/Deletecharacters/${props.character.id}`,
                 {
                     method: 'DELETE',
                     headers: {

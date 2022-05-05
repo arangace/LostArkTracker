@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import styles from "./homePage.module.css";
 import { AppContext } from "../../AppContextProvider";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Link } from "@mui/material";
 export const HomePage = () => {
-  const { completedTasksSubmit } = useContext(AppContext);
+  const { completedTasksSubmit, url } = useContext(AppContext);
   // useEffect(() => {
 
 
@@ -23,7 +23,13 @@ export const HomePage = () => {
               Getting Started
             </Typography>
             <Typography variant="body2">
-              Get started by clicking Login and login using your pre-existing details or sign up!<br></br>
+              Get started by clicking
+              <Link href={`${url}/ark/Getcommands`} underline="none">
+                {' here'}</Link>
+              and click agree. Then click
+              <Link href="/login" underline="none">
+                {' login '}</Link>
+              using your pre-existing details or sign up!<br></br>
               Then view your characters on the Tracker tab and add characters with the Add Character tab
             </Typography>
           </CardContent>

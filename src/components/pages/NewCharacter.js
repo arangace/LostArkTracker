@@ -14,7 +14,7 @@ const NewCharacter = () => {
     const [characterName, setcharacterName] = useState("")
     const [successModal, setsuccessModal] = useState(false)
     const [redirect, setredirect] = useState(false)
-    const { account } = useContext(AppContext)
+    const { account, url } = useContext(AppContext)
 
     const modalStyles = {
         display: "flex",
@@ -56,7 +56,7 @@ const NewCharacter = () => {
     const update = async (character) => {
         try {
 
-            const response = await fetch(`https://122.57.82.179:8080/ark/Addcharacters/${account}`,
+            const response = await fetch(`${url}/ark/Addcharacters/${account}`,
                 {
                     method: 'POST',
                     headers: {

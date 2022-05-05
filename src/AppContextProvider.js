@@ -17,13 +17,14 @@ function AppContextProvider({ children }) {
   const [currentCharacter, setcurrentCharacter] = useState({})
   const [characters, setCharacters] = useState([]);
   const [version, setversion] = useState(0)
+  const url = 'https://122.57.82.16:8080'
 
   const sendUpdate = (updatePayload) => {
     const sendData = async (character) => {
       console.log(character);
       try {
 
-        await fetch(`https://122.57.82.179:8080/ark/Updatecharacters/${character.charId}`,
+        await fetch(`${url}/ark/Updatecharacters/${character.charId}`,
           {
             method: 'PUT',
             headers: {
@@ -49,6 +50,7 @@ function AppContextProvider({ children }) {
 
   // The context value that will be supplied to any descendants of this component.
   const context = {
+    url,
     completedTasksSubmit,
     setcompletedTasksSubmit,
     modal,

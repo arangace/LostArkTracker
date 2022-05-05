@@ -9,7 +9,7 @@ import { LoginPrompt } from "./LoginPrompt";
 import Loading from './Loading'
 
 export const TrackerPage = () => {
-  const { account, setAccount, setModal, currentCharacter, setcurrentCharacter, isLoading, setIsLoading, version } = useContext(AppContext)
+  const { url, account, setAccount, setModal, currentCharacter, setcurrentCharacter, isLoading, setIsLoading, version } = useContext(AppContext)
   const [doneModal, setDoneModal] = useState(false);
   const [characters, setCharacters] = useState([]);
 
@@ -26,7 +26,7 @@ export const TrackerPage = () => {
   const fetchData = async (values) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://122.57.82.179:8080/ark/Getcharacters/${account}`);
+      const response = await fetch(`${url}/ark/Getcharacters/${account}`);
       const data = await response.json();
       setIsLoading(false);
       const characterList = data.map((element) => {

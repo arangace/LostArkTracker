@@ -7,14 +7,14 @@ import { AppContext } from "../../AppContextProvider";
 
 export const Login = (props) => {
   const [userName, setUserName] = useState("");
-  const { account, setAccount } = useContext(AppContext)
+  const { account, setAccount, url } = useContext(AppContext)
   const [signUp, setsignUp] = useState(false)
   const [signUpDetails, setSignUpDetails] = useState()
   const handleSubmit = async () => {
     try {
       console.log(userName)
 
-      const response = await fetch(`https://122.57.82.179:8080/ark/Getaccount/${userName}`,
+      const response = await fetch(`${url}/ark/Getaccount/${userName}`,
         {
           method: 'GET',
           headers: {
@@ -45,7 +45,7 @@ export const Login = (props) => {
     console.log(signUpDetails)
     let newAccount = { name: signUpDetails }
     try {
-      await fetch(`https://122.57.82.179:8080/ark/Addaccount/`,
+      await fetch(`${url}/ark/Addaccount/`,
         {
           method: 'POST',
           headers: {
