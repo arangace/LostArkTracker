@@ -25,7 +25,7 @@ export const HomePage = () => {
             <Typography variant="body2">
               Get started by clicking
               <Link href={`${url}/ark/Getcommands`} underline="none">
-                {' here'}</Link>
+                {' here '}</Link>
               and click agree. Then click
               <Link href="/login" underline="none">
                 {' login '}</Link>
