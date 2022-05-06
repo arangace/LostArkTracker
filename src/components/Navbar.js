@@ -12,7 +12,7 @@ export const Navbar = () => {
 
   return (
     <div className={styles.navBar}>
-      <h1>
+      <h1 className={styles.title}>
         <Link to="/">LATracker</Link>
       </h1>
       <ul className={styles["sub-nav"]}>

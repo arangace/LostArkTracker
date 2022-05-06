@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import styles from './newCharacter.module.css'
 import { ClearCount } from './ModalComponents/ClearCount'
 import { Formik, Form } from 'formik'
-import { Typography, TextField, Button, Slider, Box, Modal } from '@mui/material'
+import { Typography, TextField, Button, Slider, Box, Modal, Card } from '@mui/material'
 import { AppContext } from '../../AppContextProvider'
 import { LoginPrompt } from './LoginPrompt'
 import { Navigate } from "react-router-dom";
@@ -99,7 +99,7 @@ const NewCharacter = () => {
         setsuccessModal(false)
     }
     return (
-        <>
+        <div className={styles.page}>
             <Modal
                 sx={modalStyles}
                 open={successModal}
@@ -114,80 +114,82 @@ const NewCharacter = () => {
 
                 </Box>
             </Modal>
-            {account ? <div className={styles.page}>
+            {account ? <div className={`page`}>
                 <Box sx={{ minWidth: 200 }}>
+                    <Card sx={{ width: "100%", padding: "5%" }}>
+                        <Formik
+                            initialValues={
+                                {
+                                    chaosDungeonClearCount: "0",
+                                    guardianRaidClearCount: "0",
+                                    unaTaskClearCount: "0",
+                                }}
+                            onSubmit={handleAdd}
+                        >
+                            <Form>
+                                <div role="group" aria-labelledby="checkbox-group">
+                                    <Typography id="character-name" variant="h5" component="h5" gutterBottom>
+                                        Character Name:
+                                    </Typography>
+                                    <TextField autoFocus={true} onChange={handleCharacterName} value={characterName} id="outlined-basic" label="Character Name" variant="outlined" />
+                                    <Typography id="item-level" variant="h5" component="h5" gutterBottom>
+                                        Item Level:
+                                    </Typography>
+                                    <TextField onChange={handleItemLevel} value={itemLevel} id="outlined-basic" label="Item Level" variant="outlined" />
+                                    <Typography id="item-level" variant="h6" component="h6" gutterBottom>
+                                        Chaos dungeon rest bonus
+                                    </Typography>
+                                    <Slider
+                                        aria-label="chaosRestBonus"
+                                        defaultValue={0}
+                                        getAriaValueText={chaosDungRB}
+                                        valueLabelDisplay="auto"
+                                        step={10}
+                                        marks
+                                        min={0}
+                                        max={100}
+                                    />
+                                    <Typography id="item-level" variant="h6" component="h5" gutterBottom>
+                                        Guardian raid rest bonus
+                                    </Typography>
+                                    <Slider
+                                        aria-label="guardianRestBonus"
+                                        defaultValue={0}
+                                        getAriaValueText={guardRaidRB}
+                                        valueLabelDisplay="auto"
+                                        step={10}
+                                        marks
+                                        min={0}
+                                        max={100}
+                                    />
+                                    <Typography id="item-level" variant="h6" component="h5" gutterBottom>
+                                        Una's tasks rest bonus
+                                    </Typography>
+                                    <Slider
+                                        aria-label="unaRestBonus"
+                                        defaultValue={0}
+                                        getAriaValueText={unaRB}
+                                        valueLabelDisplay="auto"
+                                        step={10}
+                                        marks
+                                        min={0}
+                                        max={100}
+                                    />
+                                    <Typography id="todays-clears" variant="h6" component="h5">
+                                        Todays Clears:
+                                    </Typography>
+                                    <ClearCount />
+                                </div>
+                                <Button variant="contained" type="submit">Add</Button>
+                            </Form>
+                        </Formik>
 
-                    <Formik
-                        initialValues={
-                            {
-                                chaosDungeonClearCount: "0",
-                                guardianRaidClearCount: "0",
-                                unaTaskClearCount: "0",
-                            }}
-                        onSubmit={handleAdd}
-                    >
-                        <Form>
-                            <div role="group" aria-labelledby="checkbox-group">
-                                <Typography id="character-name" variant="h5" component="h5" gutterBottom>
-                                    Character Name:
-                                </Typography>
-                                <TextField autoFocus={true} onChange={handleCharacterName} value={characterName} id="outlined-basic" label="Character Name" variant="outlined" />
-                                <Typography id="item-level" variant="h5" component="h5" gutterBottom>
-                                    Item Level:
-                                </Typography>
-                                <TextField onChange={handleItemLevel} value={itemLevel} id="outlined-basic" label="Item Level" variant="outlined" />
-                                <Typography id="item-level" variant="h6" component="h6" gutterBottom>
-                                    Chaos dungeon rest bonus
-                                </Typography>
-                                <Slider
-                                    aria-label="chaosRestBonus"
-                                    defaultValue={0}
-                                    getAriaValueText={chaosDungRB}
-                                    valueLabelDisplay="auto"
-                                    step={10}
-                                    marks
-                                    min={0}
-                                    max={100}
-                                />
-                                <Typography id="item-level" variant="h6" component="h5" gutterBottom>
-                                    Guardian raid rest bonus
-                                </Typography>
-                                <Slider
-                                    aria-label="guardianRestBonus"
-                                    defaultValue={0}
-                                    getAriaValueText={guardRaidRB}
-                                    valueLabelDisplay="auto"
-                                    step={10}
-                                    marks
-                                    min={0}
-                                    max={100}
-                                />
-                                <Typography id="item-level" variant="h6" component="h5" gutterBottom>
-                                    Una's tasks rest bonus
-                                </Typography>
-                                <Slider
-                                    aria-label="unaRestBonus"
-                                    defaultValue={0}
-                                    getAriaValueText={unaRB}
-                                    valueLabelDisplay="auto"
-                                    step={10}
-                                    marks
-                                    min={0}
-                                    max={100}
-                                />
-                                <Typography id="todays-clears" variant="h6" component="h5">
-                                    Todays Clears:
-                                </Typography>
-                                <ClearCount />
-                            </div>
-                            <Button variant="contained" type="submit">Add</Button>
-                        </Form>
-                    </Formik>
+                    </Card>
                 </Box>
             </div>
                 : <LoginPrompt />}
             {((redirect) && <Navigate to="/tracker" />)}
-        </>
+        </div>
 
     )
 }

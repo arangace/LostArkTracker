@@ -14,7 +14,7 @@ export const HomePage = () => {
 
 
   return (
-    <div className={styles.page}>
+    <div className={"page"}>
       <div className={styles.content}>
         <Card>
           <CardContent>

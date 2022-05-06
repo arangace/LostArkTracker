@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import styles from "./login.module.css";
-import { Button, Box, TextField } from "@mui/material";
+import { Button, Box, TextField, Card } from "@mui/material";
 import { Formik, Form } from "formik";
 import { Navigate } from "react-router-dom";
 import { AppContext } from "../../AppContextProvider";
@@ -44,7 +44,7 @@ export const Login = (props) => {
   }
   const handleSignUp = async () => {
     console.log(signUpDetails)
-    let newAccount = { name: signUpDetails }
+    let newAccount = { name: signUpDetails.toLowerCase() }
     try {
       await fetch(`${url}/ark/Addaccount/`,
         {
@@ -65,53 +65,52 @@ export const Login = (props) => {
   }, [])
 
   return (
-    <div className={styles.page}>
+    <div className={`page ${styles.page}`}>
       <div>
-        <h2>Login</h2>
-        <Box
-          sx={{
-            "& > :not(style)": { m: 1, width: "25ch" },
-          }}
-        >
-          <div className={styles["login-form"]}>
-            <Formik
-              initialValues={
-                {
-                }}
-              onSubmit={handleLogin}
-            >
-              <Form sx={{ display: "flex", justifyContent: "space-between" }}>
-                <TextField
-                  id="outlined-basic"
-                  label="Username"
-                  variant="outlined"
-                  onChange={handleUserName}
-                />
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <Button variant="contained" type="submit">Login</Button>
-                </Box>
-              </Form>
-            </Formik>
-            <h2>Or..</h2>
-            <h2>Sign Up</h2>
-            <Formik
-              onSubmit={handleSignUp}
-            >
-              <Form>
+
+        <Box        >
+          <Card sx={{ width: "100%", padding: "5%" }}>
+            <h2>Login</h2>
+            <div className={styles["login-form"]}>
+              <Formik
+                initialValues={
+                  {
+                  }}
+                onSubmit={handleLogin}
+              >
+                <Form sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Username"
+                    variant="outlined"
+                    onChange={handleUserName}
+                  />
+                  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Button variant="contained" type="submit">Login</Button>
+                  </Box>
+                </Form>
+              </Formik>
+              <h2>Or..</h2>
+              <h2>Sign Up</h2>
+              <Formik
+                onSubmit={handleSignUp}
+              >
+                <Form>
 
 
-                <TextField
-                  id="outlined-basic"
-                  label="Username"
-                  variant="outlined"
-                  onChange={handleSignUpName}
-                />
-                <Button variant="contained" color="secondary" onClick={handleSignUp}>Sign Up</Button>
-              </Form>
-            </Formik>
-            {((account) && <Navigate to="/tracker" />)}
-            {signUp && <Navigate to='/' />}
-          </div>
+                  <TextField
+                    id="outlined-basic"
+                    label="Username"
+                    variant="outlined"
+                    onChange={handleSignUpName}
+                  />
+                  <Button variant="contained" color="secondary" onClick={handleSignUp}>Sign Up</Button>
+                </Form>
+              </Formik>
+              {((account) && <Navigate to="/tracker" />)}
+              {signUp && <Navigate to='/' />}
+            </div>
+          </Card>
         </Box>
       </div>
     </div>

@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  background-color: rgb(0, 0, 0);
   border-bottom: 1px solid black;
   height: 10vh;
   width: 100%;
@@ -19,4 +20,16 @@
 }
 .sub-nav * {
   text-decoration: none;
+}
+a {
+  color: white;
+}
+a:hover {
+  text-decoration: underline;
+}
+.title a {
+  text-decoration: none;
+}
+.title a:hover {
+  text-decoration: underline;
 }

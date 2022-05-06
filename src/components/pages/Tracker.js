@@ -95,69 +95,74 @@ export const TrackerPage = () => {
   }, [version]);
 
   return (
-    <div className={styles.page}>
+    <div className={`page ${styles.page} `}>
       {account ?
         <div className={styles.content}>
-          <div>
-            <h4>Tip: </h4>Add new users with the "Add Character" Link, view character's on this page.<br></br>Edit characters rest bonuses, guardian raid clears etc by clicking on
-            the characters card.<br></br>
-            Click "Submit Character Changes" to update all changed characters</div>
-          <ModalForm character={currentCharacter} />
-          <DoneModal modal={doneModal} handleDoneModal={handleDoneModal} />
+          <Card sx={{ padding: "1fr", width: "90%" }}>
+            <CardContent>
 
-          <Box sx={{ width: '100%' }}>
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <div>
+                <h4>Tip: </h4>Add new users with the "Add Character" Link, view character's on this page.<br></br>Edit characters rest bonuses, guardian raid clears etc by clicking on
+                the characters card.<br></br>
+                Click "Submit Character Changes" to update all changed characters</div>
+              <ModalForm character={currentCharacter} />
+              <DoneModal modal={doneModal} handleDoneModal={handleDoneModal} />
 
-              {isLoading ? <Loading /> : characters.map((character, key) => (
-                <Grid key={key} item xs={{ width: '30%' }}>
-                  <Card className={styles.card} onClick={() => handleCharacterClick(character)} variant="outlined">
-                    <CardContent>
-                      <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                        {"Character " + character.id}
-                      </Typography>
-                      <Typography variant="h5" component="div" gutterBottom>
-                        {character.name}
-                      </Typography>
-                      <Typography sx={{ mb: 1 }} color="text.secondary">
-                        {"Item Level: " + character.itemLevel}
-                      </Typography>
-                      <Typography variant="body2">
-                        <Box sx={{ flexGrow: 1 }}>
-                          <Grid direction="column" container spacing={0.5}>
-                            <Grid item xs={1}>
-                              {"Chaos Dungeon Clears: " + character.chaosDungCC}
-                            </Grid>
-                            <Grid item xs={1}>
-                              {"Rest Bonus: " + character.chaosRB}
-                              <RestBonusBar value={character.chaosRB} />
-                            </Grid>
-                            <Grid item xs={1}>
-                              {"Guardian Raid Clears: " + character.guardianRaidCC}
-                            </Grid>
-                            <Grid item xs={1}>
-                              {"Rest Bonus: " + character.guardianRaidRB}
-                              <RestBonusBar value={character.guardianRaidRB} />
-                            </Grid>
-                            <Grid item xs={1}>
-                              {"Una's Tasks Clears: " + character.unaTaskCC}
-                            </Grid>
-                            <Grid item xs={1}>
-                              {"Rest Bonus: " + character.unaRB}
-                              <RestBonusBar value={character.unaRB} />
-                            </Grid>
-                          </Grid>
-                        </Box>
-                      </Typography>
-                    </CardContent>
-                  </Card>
+              <Box sx={{ width: '100%' }}>
+                <Grid container spacing={{ xs: 1, md: 0 }}>
+                  {isLoading ? <Loading /> : characters.map((character, key) => (
+                    <Grid key={key} item xs={{ width: '30%' }} >
+                      <Card className={styles.card} onClick={() => handleCharacterClick(character)} variant="outlined">
+                        <CardContent>
+                          <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                            {"Character ID: " + character.id}
+                          </Typography>
+                          <Typography variant="h5" component="div" gutterBottom>
+                            {character.name}
+                          </Typography>
+                          <Typography sx={{ mb: 1 }} color="text.secondary">
+                            {"Item Level: " + character.itemLevel}
+                          </Typography>
+                          <Typography variant="body2">
+                            <Box sx={{ flexGrow: 1 }}>
+                              <Grid direction="column" container spacing={0.5}>
+                                <Grid item xs={1}>
+                                  {"Chaos Dungeon Clears: " + character.chaosDungCC}
+                                </Grid>
+                                <Grid item xs={1}>
+                                  {"Rest Bonus: " + character.chaosRB}
+                                  <RestBonusBar value={character.chaosRB} />
+                                </Grid>
+                                <Grid item xs={1}>
+                                  {"Guardian Raid Clears: " + character.guardianRaidCC}
+                                </Grid>
+                                <Grid item xs={1}>
+                                  {"Rest Bonus: " + character.guardianRaidRB}
+                                  <RestBonusBar value={character.guardianRaidRB} />
+                                </Grid>
+                                <Grid item xs={1}>
+                                  {"Una's Tasks Clears: " + character.unaTaskCC}
+                                </Grid>
+                                <Grid item xs={1}>
+                                  {"Rest Bonus: " + character.unaRB}
+                                  <RestBonusBar value={character.unaRB} />
+                                </Grid>
+                              </Grid>
+                            </Box>
+                          </Typography>
+                        </CardContent>
+                      </Card>
 
+                    </Grid>
+                  ))}
                 </Grid>
-              ))}
-            </Grid>
-          </Box>
-          <Button sx={doneButtonStyles} onClick={handleDone} size="large" color="success" variant="contained" type="submit">Submit Character Changes</Button>
+              </Box>
+              <Button sx={doneButtonStyles} onClick={handleDone} size="large" color="success" variant="contained" type="submit">Submit Character Changes</Button>
+            </CardContent>
+          </Card>
         </div>
         : <LoginPrompt />}
+
     </div >
   );
 };
