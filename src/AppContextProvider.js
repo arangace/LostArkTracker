@@ -21,10 +21,11 @@ function AppContextProvider({ children }) {
 
   const sendUpdate = (updatePayload) => {
     console.log("Sending Update..")
+    console.log(updatePayload)
     const sendData = async (character) => {
       console.log(character);
+      console.log(character.charId)
       try {
-
         await fetch(`${url}/ark/Updatecharacters/${character.charId}`,
           {
             method: 'PUT',
@@ -33,18 +34,18 @@ function AppContextProvider({ children }) {
             },
             body: JSON.stringify(character)
           });
-        setcompletedTasksSubmit([])
-        updatePayload.forEach((character) => {
-          sendData(character)
-        })
-        setversion(version + 1);
+
+
       }
       catch (e) {
         console.log(e)
       }
-
     }
-
+    updatePayload.forEach((character) => {
+      sendData(character)
+    })
+    setcompletedTasksSubmit([])
+    setversion(version + 1);
   }
   useEffect(() => {
     localStorage.getItem('currentAccount') ? setAccount(localStorage.getItem('currentAccount')) : setAccount(0)
