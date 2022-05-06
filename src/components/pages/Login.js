@@ -10,8 +10,9 @@ export const Login = (props) => {
   const { account, setAccount, url } = useContext(AppContext)
   const [signUp, setsignUp] = useState(false)
   const [signUpDetails, setSignUpDetails] = useState()
-  const handleSubmit = async () => {
+  const handleLogin = async () => {
     try {
+      setUserName(userName.toLowerCase())
       console.log(userName)
 
       const response = await fetch(`${url}/ark/Getaccount/${userName}`,
@@ -77,7 +78,7 @@ export const Login = (props) => {
               initialValues={
                 {
                 }}
-              onSubmit={handleSubmit}
+              onSubmit={handleLogin}
             >
               <Form sx={{ display: "flex", justifyContent: "space-between" }}>
                 <TextField

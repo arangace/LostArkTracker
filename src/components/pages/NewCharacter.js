@@ -180,7 +180,7 @@ const NewCharacter = () => {
                                 </Typography>
                                 <ClearCount />
                             </div>
-                            <Button variant="contained" type="submit">Update</Button>
+                            <Button variant="contained" type="submit">Add</Button>
                         </Form>
                     </Formik>
                 </Box>

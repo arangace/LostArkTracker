@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import { Modal, Box, Typography, Button, TextField } from "@mui/material";
+import { Modal, Box, Typography, Button, TextField, Slider } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../../AppContextProvider";
 import { ClearCount } from "./ClearCount";
@@ -8,6 +8,9 @@ const ModalForm = (props) => {
   const { setModal, modal, completedTasksSubmit, setcompletedTasksSubmit, account } = useContext(AppContext)
   const [itemLevel, setitemLevel] = useState()
   const [deleteModal, setdeleteModal] = useState(false);
+  const [CDRB, setCDRB] = useState(0)
+  const [GRRB, setGRRB] = useState(0)
+  const [UnaRB, setUnaRB] = useState(0)
   const backdropStyles = {
     position: 'absolute',
     width: "50%",
@@ -34,20 +37,30 @@ const ModalForm = (props) => {
   }
 
   const handleUpdate = async (values) => {
-    console.log(values)
-    const newTaskSubmit = {
-      itemLevel: itemLevel,
-      characterName: props.character.name,
-      charId: props.character.id,
-      ...values
+    try {
+      console.log(values)
+      const newTaskSubmit = {
+        itemLevel: itemLevel ? itemLevel : props.character.itemLevel,
+        characterName: props.character.name,
+        charId: props.character.id,
+        chaosRestBonus: CDRB,
+        guardianRestBonus: GRRB,
+        unaRestBonus: UnaRB,
+        ...values
+      }
+      console.log(`Submitting character: ${values} CD: ${CDRB} GR: ${GRRB} UNA: ${UnaRB}`)
+      //check if there is a duplicate update, then replace the old update with the new one
+      const duplicate = completedTasksSubmit.filter((form) => (
+        form.charId !== newTaskSubmit.charId
+      ))
+      const newCompletedTasksSubmit = [...duplicate, newTaskSubmit]
+      setcompletedTasksSubmit(newCompletedTasksSubmit)
+      handleModal()
     }
-    //check if there is a duplicate update, then replace the old update with the new one
-    const duplicate = completedTasksSubmit.filter((form) => (
-      form.charId !== newTaskSubmit.charId
-    ))
-    const newCompletedTasksSubmit = [...duplicate, newTaskSubmit]
-    setcompletedTasksSubmit(newCompletedTasksSubmit)
-    handleModal()
+    catch (e) {
+      console.log(e)
+    }
+
   }
   function handleModal() {
     setModal(false)
@@ -79,9 +92,9 @@ const ModalForm = (props) => {
             <Formik
               initialValues={
                 {
-                  chaosDungeonClearCount: "none",
-                  guardianRaidClearCount: "none",
-                  unaTaskClearCount: "none",
+                  chaosDungeonClearCount: (props.character.chaosDungeonClearCount ? props.character.chaosDungeonClearCount : 0),
+                  guardianRaidClearCount: (props.character.guardianRaidClearCount ? props.character.guardianRaidClearCount : 0),
+                  unaTaskClearCount: (props.character.unaTaskClearCount ? props.character.unaTaskClearCount : 0),
                 }}
               onSubmit={handleUpdate}
             >
@@ -96,9 +109,51 @@ const ModalForm = (props) => {
                     Todays Clears:
                   </Typography>
                   <ClearCount />
+                  <Typography id="rest-bonus" variant="h5" component="h5">
+                    Manually Change Rest Bonus:
+                  </Typography>
+                  <Typography id="item-level" variant="h6" component="h5" gutterBottom>
+                    Chaos Dungeon rest bonus:
+                  </Typography>
+                  <Slider
+                    aria-label="chaosRestBonus"
+                    defaultValue={0}
+                    getAriaValueText={(value) => setCDRB(value)}
+                    valueLabelDisplay="auto"
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                  />
+                  <Typography id="item-level" variant="h6" component="h5" gutterBottom>
+                    Guardian raid rest bonus:
+                  </Typography>
+                  <Slider
+                    aria-label="guardianRestBonus"
+                    defaultValue={0}
+                    getAriaValueText={(value) => setGRRB(value)}
+                    valueLabelDisplay="auto"
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                  />
+                  <Typography id="item-level" variant="h6" component="h5" gutterBottom>
+                    Una's tasks rest bonus:
+                  </Typography>
+                  <Slider
+                    aria-label="unaRestBonus"
+                    defaultValue={0}
+                    getAriaValueText={(value) => setUnaRB(value)}
+                    valueLabelDisplay="auto"
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                  />
                 </div>
                 <Box sx={{ display: "flex" }}>
-                  <Button variant="contained" type="submit">Update</Button>
+                  <Button variant="contained" type="submit">Update Character</Button>
                   <Button sx={deleteButtonStyles} onClick={handleDeleteModal} variant="contained" >Delete</Button>
                 </Box>
               </Form>

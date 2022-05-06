@@ -39,12 +39,12 @@ const DoneModal = (props) => {
                     Update Characters
                 </Typography>
                 <Typography id="modal-modal-title" variant="h5" component="h3">
-                    Updated Characters
+                    Characters Changed:
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     {completedTasksSubmit.map((form) => (
                         <>
-                            <p>{form.charId}{form.characterName}</p>
+                            <text>ID {form.charId}: {form.characterName}</text>
                         </>
                     ))}
                 </Typography>
