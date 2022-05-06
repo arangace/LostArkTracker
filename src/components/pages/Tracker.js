@@ -57,6 +57,9 @@ export const TrackerPage = () => {
     setDoneModal(false)
   }
   useEffect(() => {
+    fetchData()
+  }, [])
+  useEffect(() => {
     fetchData();
 
     // TESTING
@@ -95,19 +98,18 @@ export const TrackerPage = () => {
     <div className={styles.page}>
       {account ?
         <div className={styles.content}>
-          <h1>Character List</h1>
-          <h4>Tip: </h4>
-          <p> Add new users with the "Add Character" Link, view character's on this page.<br></br>Edit characters rest bonuses, guardian raid clears etc by clicking on
+          <div>
+            <h4>Tip: </h4>Add new users with the "Add Character" Link, view character's on this page.<br></br>Edit characters rest bonuses, guardian raid clears etc by clicking on
             the characters card.<br></br>
-            Click "Submit Update" to update all changed characters</p>
+            Click "Submit Update" to update all changed characters</div>
           <ModalForm character={currentCharacter} />
           <DoneModal modal={doneModal} handleDoneModal={handleDoneModal} />
 
           <Box sx={{ width: '100%' }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
-              {isLoading ? <Loading /> : characters.map((character) => (
-                <Grid item xs={{ width: '30%' }}>
+              {isLoading ? <Loading /> : characters.map((character, key) => (
+                <Grid key={key} item xs={{ width: '30%' }}>
                   <Card className={styles.card} onClick={() => handleCharacterClick(character)} variant="outlined">
                     <CardContent>
                       <Typography sx={{ fontSize: 14 }} color="text.secondary">
@@ -153,7 +155,7 @@ export const TrackerPage = () => {
               ))}
             </Grid>
           </Box>
-          <Button sx={doneButtonStyles} onClick={handleDone} size="large" color="success" variant="contained" type="submit">Submit Update</Button>
+          <Button sx={doneButtonStyles} onClick={handleDone} size="large" color="success" variant="contained" type="submit">Submit Character Changes</Button>
         </div>
         : <LoginPrompt />}
     </div >

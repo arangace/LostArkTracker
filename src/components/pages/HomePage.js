@@ -30,7 +30,8 @@ export const HomePage = () => {
               <Link href="/login" underline="none">
                 {' login '}</Link>
               using your pre-existing details or sign up!<br></br>
-              Then view your characters on the Tracker tab and add characters with the Add Character tab
+              Then view your characters on the Tracker tab and add characters with the Add Character tab<br></br>
+              <Typography variant="h6" component="h1" gutterBottom>NOTE: DO NOT REFRESH ANY PAGE OTHER THAN THE HOME PAGE.  Netlify is bugging out with react router, working on a fix</Typography>
             </Typography>
           </CardContent>
         </Card>

@@ -20,6 +20,7 @@ function AppContextProvider({ children }) {
   const url = 'https://122.57.82.16:8080'
 
   const sendUpdate = (updatePayload) => {
+    console.log("Sending Update..")
     const sendData = async (character) => {
       console.log(character);
       try {
@@ -32,16 +33,18 @@ function AppContextProvider({ children }) {
             },
             body: JSON.stringify(character)
           });
+        setcompletedTasksSubmit([])
+        updatePayload.forEach((character) => {
+          sendData(character)
+        })
+        setversion(version + 1);
       }
       catch (e) {
         console.log(e)
       }
 
     }
-    updatePayload.forEach((character) => {
-      sendData(character)
-    })
-    setversion(version + 1);
+
   }
   useEffect(() => {
     localStorage.getItem('currentAccount') ? setAccount(localStorage.getItem('currentAccount')) : setAccount(0)
