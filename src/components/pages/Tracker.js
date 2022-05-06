@@ -101,7 +101,7 @@ export const TrackerPage = () => {
           <div>
             <h4>Tip: </h4>Add new users with the "Add Character" Link, view character's on this page.<br></br>Edit characters rest bonuses, guardian raid clears etc by clicking on
             the characters card.<br></br>
-            Click "Submit Update" to update all changed characters</div>
+            Click "Submit Character Changes" to update all changed characters</div>
           <ModalForm character={currentCharacter} />
           <DoneModal modal={doneModal} handleDoneModal={handleDoneModal} />
 
