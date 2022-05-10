@@ -130,7 +130,7 @@ const ModalForm = (props) => {
                   </Typography>
                   <Slider
                     aria-label="guardianRestBonus"
-                    defaultValue={props.character.guardianRB}
+                    defaultValue={props.character.guardianRaidRB}
                     getAriaValueText={(value) => setGRRB(value)}
                     valueLabelDisplay="auto"
                     step={10}
