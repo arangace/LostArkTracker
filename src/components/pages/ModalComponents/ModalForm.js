@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { Modal, Box, Typography, Button, TextField, Slider } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../../AppContextProvider";
 import { ClearCount } from "./ClearCount";
 import DeleteModal from "./DeleteModal";
@@ -117,7 +117,7 @@ const ModalForm = (props) => {
                   </Typography>
                   <Slider
                     aria-label="chaosRestBonus"
-                    defaultValue={0}
+                    defaultValue={props.character.chaosRB}
                     getAriaValueText={(value) => setCDRB(value)}
                     valueLabelDisplay="auto"
                     step={10}
@@ -130,7 +130,7 @@ const ModalForm = (props) => {
                   </Typography>
                   <Slider
                     aria-label="guardianRestBonus"
-                    defaultValue={0}
+                    defaultValue={props.character.guardianRB}
                     getAriaValueText={(value) => setGRRB(value)}
                     valueLabelDisplay="auto"
                     step={10}
@@ -143,7 +143,7 @@ const ModalForm = (props) => {
                   </Typography>
                   <Slider
                     aria-label="unaRestBonus"
-                    defaultValue={0}
+                    defaultValue={props.character.unaRB}
                     getAriaValueText={(value) => setUnaRB(value)}
                     valueLabelDisplay="auto"
                     step={10}

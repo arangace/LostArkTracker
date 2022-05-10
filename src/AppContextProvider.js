@@ -45,7 +45,11 @@ function AppContextProvider({ children }) {
       sendData(character)
     })
     setcompletedTasksSubmit([])
-    setversion(version + 1);
+    setTimeout(() => {
+      setversion(version + 1);
+    }, 500);
+
+
   }
   useEffect(() => {
     localStorage.getItem('currentAccount') ? setAccount(localStorage.getItem('currentAccount')) : setAccount(0)

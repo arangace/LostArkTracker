@@ -6,6 +6,7 @@ import { Typography, TextField, Button, Slider, Box, Modal, Card } from '@mui/ma
 import { AppContext } from '../../AppContextProvider'
 import { LoginPrompt } from './LoginPrompt'
 import { Navigate } from "react-router-dom";
+import AbyssClearCount from './AbyssClearCount'
 const NewCharacter = () => {
     const [CDRB, setCDRB] = useState(0)
     const [GRRB, setGRRB] = useState(0)
@@ -79,7 +80,7 @@ const NewCharacter = () => {
 
     }
     const handleAdd = (values) => {
-
+        console.log(JSON.stringify(values, null, 2));
         const characterForm = {
             characterName: characterName,
             itemLevel: itemLevel,
@@ -93,13 +94,14 @@ const NewCharacter = () => {
         };
         console.log(newCharacter)
         console.log(account)
+
         update(newCharacter)
     }
     const handlesuccessModal = () => {
         setsuccessModal(false)
     }
     return (
-        <div className={styles.page}>
+        <div className={!account ? styles.page : ""}>
             <Modal
                 sx={modalStyles}
                 open={successModal}
@@ -179,6 +181,7 @@ const NewCharacter = () => {
                                         Todays Clears:
                                     </Typography>
                                     <ClearCount />
+                                    <AbyssClearCount />
                                 </div>
                                 <Button variant="contained" type="submit">Add</Button>
                             </Form>
