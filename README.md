@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+# LostArkTracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What is it?
+This application allows a user to track and update their Lost Ark daily as well as weekly progression all in one place. This application was built within 2 weeks to accomodate for the demand for tracking daily statuses. Allowing users to update their infomration per character and login per account. Facilitating multiple different users to be able to store their information.
 
-## Available Scripts
+### How to use it
+Visit https://latracker.netlify.app/ to access the homepage. Once the backend is running, you should be able to see all your characters once you login.
+As the backend is hosted remotely and not deployed, a certificate will need to be ackowledged in which you will need to press OK for safety. Login with your username or alternatively sign up for your own account. Once logged in you will be redirected to the tracker page, there you can see the status of all your characters. Characters 'rest bonuses' will be updated at reset. 
 
-In the project directory, you can run:
+## How does it work?
+This application integrates with a backend API developed by another developer to store these values into a database and is then updated on the frontend when there is a change. This API is consumed on page load and on update of a character. This data is then presented to the user on the character page with all the values reflected and all shown at once, so users at a glance can see which characters to prioritise. The user can then access their information.
 
-### `npm start`
+## Why did we make this?
+There was a strong desire amongst friends to be able to track their characters daily information as there were about 5 different types of dailies to do and about 3 different weeklies. This scaled by each character, once somebody had 3 characters, it would be 24 different items to track and be aware of to do. Some friends resulted in using spreadsheets, documents or manually logging into each character to track it. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This made me think to develop a simple and effective solution for my friends to keep track of their character information all in one place. The solution was originally going to be developed on Discord using DiscordJS but due to its complexity it did not help serve our time constraints. There were time constraints to this project due to it being redundant within a few months. To allow people to fully utilise the benefits of this website for the most amount of time, this application would need to be delivered quickly and effectively, before its inevitable redundancy. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Due to the time crunch, I applied a simple solution to the project. Creating a website with ReactJS, hosting a .NET backend hooked up with a database. Splitting the development work between myself in the frontend and my friend in the backend. For the frontend, to speed things up I leveraged MaterialUI for components, forms, buttons and such to use their out-of-the-box components instead of having to create them myself. While keeping functionality to a minimum whilst encapsulating all that was needed. Authentication was simplified to just the account name and changing values was a mimic of the display card. This overall allowed us to deliver and deploy the solution much quicker and allowed users to use the application before its redundancy. 
 
-### `npm test`
+### Todos
+1. There are plans to deploy this websites backend but due to complications with deploying the backend, the backend currently has to be manually deployed. 
+2. Authentication would be ideal for when this becomes deployed as no one user should have access to other players data although there is not much incentive for authentication due to it's target user audience and others do not gain much from altering other peoples information
+3. The UI needs to be more user friendly, currently it is encapsulating functionality whilst leveraging materialUI for forms, cards and other components due to the intense time restriction.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Author: Andy Huang
