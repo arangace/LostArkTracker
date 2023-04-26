@@ -15,34 +15,18 @@ export const Login = (props) => {
       setUserName(userName.toLowerCase());
       console.log(userName);
 
-      // const response = await fetch(`${url}/api/getAccount/${userName}`, {
-      //   method: "GET",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: "Basic ",
-      //   },
-      // });
+      const response = await fetch(`${url}/api/getAccount/${userName}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic ",
+        },
+      });
 
-      const response = await fetch(
-        `https://la-tracker-backend-v3.vercel.app/api/account/`,
-        {
-          method: "GET",
-          mode: "cors", // no-cors, *cors, same-origin
-          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-          credentials: "same-origin", // include, *same-origin, omit
-          headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: "follow", // manual, *follow, error
-          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        }
-      );
       const data = await response.json();
-      // localStorage.setItem("currentAccount", data.id);
-      // setAccount(localStorage.getItem("currentAccount"));
-      console.log(data);
-      // console.log(`Welcome ${data.name} ID: ${data.id}`);
+      localStorage.setItem("currentAccount", data.id);
+      setAccount(localStorage.getItem("currentAccount"));
+      console.log(`Welcome ${data.name} ID: ${data.id}`);
     } catch (e) {
       alert(`User ${userName} not found`);
       console.log(e);
