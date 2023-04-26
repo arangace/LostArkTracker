@@ -5,16 +5,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   background-color: rgb(0, 0, 0);
-  border-bottom: 1px solid black;
   height: 10vh;
   width: 100%;
 }
 .sub-nav {
+  margin:0;
+  height:inherit;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
 }
