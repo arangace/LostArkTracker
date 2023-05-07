@@ -1,4 +1,6 @@
-# LostArkTracker
+# LostArkTracker 
+
+## (APPLICATION IS NO LONGER SUPPORTED AS BACKEND HAS BEEN RETIRED)
 
 ## What is it?
 This application allows a user to track and update their Lost Ark daily as well as weekly progression all in one place. This application was built within 2 weeks to accomodate for the demand for tracking daily statuses. Allowing users to update their infomration per character and login per account. Facilitating multiple different users to be able to store their information.
