@@ -1,27 +1,24 @@
 import { useState, useEffect, useContext } from "react";
 import styles from "./tracker.module.css";
-import { AppContext } from "../../AppContextProvider";
+import { AppContext } from "../../../AppContextProvider";
 import {
-  Modal,
   Box,
   Typography,
   Grid,
   CardContent,
-  CardActions,
   Card,
   Button,
 } from "@mui/material";
-import ModalForm from "./ModalComponents/ModalForm";
-import RestBonusBar from "./RestBonusBar";
-import DoneModal from "./ModalComponents/DoneModal";
-import { LoginPrompt } from "./LoginPrompt";
-import Loading from "./Loading";
+import ModalForm from "../../ModalComponents/ModalForm";
+import RestBonusBar from "../../RestBonusBar";
+import DoneModal from "../../ModalComponents/DoneModal";
+import { LoginPrompt } from "../loginprompt/LoginPrompt";
+import Loading from "../loading/Loading";
 
 export const TrackerPage = () => {
   const {
     url,
     account,
-    setAccount,
     setModal,
     currentCharacter,
     setcurrentCharacter,
@@ -29,6 +26,7 @@ export const TrackerPage = () => {
     setIsLoading,
     version,
   } = useContext(AppContext);
+
   const [doneModal, setDoneModal] = useState(false);
   const [characters, setCharacters] = useState([]);
 
@@ -36,12 +34,13 @@ export const TrackerPage = () => {
     right: 0,
     bottom: 0,
   };
+
   async function handleCharacterClick(selection) {
     setcurrentCharacter(selection);
     setModal(true);
-    console.log(currentCharacter.name);
   }
-  const fetchData = async (values) => {
+
+  const fetchData = async () => {
     setIsLoading(true);
     try {
       const response = await fetch(`${url}/ark/Getcharacters/${account}`);
@@ -62,20 +61,22 @@ export const TrackerPage = () => {
       });
       setCharacters(characterList);
     } catch (e) {
-      console.log(e);
+      throw new Error("Couldn't get characters see error: " + e);
     }
   };
 
   const handleDone = () => {
-    // TODO
     setDoneModal(true);
   };
+
   const handleDoneModal = () => {
     setDoneModal(false);
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+
   useEffect(() => {
     fetchData();
 
@@ -103,11 +104,11 @@ export const TrackerPage = () => {
     // }]
     // );
 
-    return () => {
-      characters.map((element) =>
-        console.log("character: " + element.id, element.name)
-      );
-    };
+    // return () => {
+    //   characters.map((element) =>
+    //     console.log("character: " + element.id, element.name)
+    //   );
+    // };
   }, [version]);
 
   return (

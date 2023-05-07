@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 const AppContext = React.createContext();
 
 function AppContextProvider({ children }) {
@@ -35,16 +34,12 @@ function AppContextProvider({ children }) {
   const [currentCharacter, setcurrentCharacter] = useState({});
   const [characters, setCharacters] = useState([]);
   const [version, setversion] = useState(0);
-  const url = "https://localhost:3000";
+  const url = "https://122.57.82.16:8080";
 
   const sendUpdate = (updatePayload) => {
-    console.log("Sending Update..");
-    console.log(updatePayload);
     const sendData = async (character) => {
-      console.log(character);
-      console.log(character.charId);
       try {
-        await fetch(`http://localhost:8080/api/getAccount/kelvin`, {
+        await fetch(`${url}/ark/Updatecharacters/${character.charId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +47,7 @@ function AppContextProvider({ children }) {
           body: JSON.stringify(character),
         });
       } catch (e) {
-        console.log(e);
+        throw new Error("Couldn't update character error: " + e);
       }
     };
     updatePayload.forEach((character) => {
@@ -70,7 +65,6 @@ function AppContextProvider({ children }) {
     setversion(version + 1);
   }, []);
 
-  // The context value that will be supplied to any descendants of this component.
   const context = {
     url,
     completedTasksSubmit,
@@ -92,7 +86,6 @@ function AppContextProvider({ children }) {
     setversion,
   };
 
-  // Wraps the given child components in a Provider for the above context.
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
 }
 

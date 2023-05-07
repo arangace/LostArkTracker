@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import styles from "./newCharacter.module.css";
-import { ClearCount } from "./ModalComponents/ClearCount";
+import { ClearCount } from "../../ModalComponents/ClearCount";
 import { Formik, Form } from "formik";
 import {
   Typography,
@@ -11,10 +11,9 @@ import {
   Modal,
   Card,
 } from "@mui/material";
-import { AppContext } from "../../AppContextProvider";
-import { LoginPrompt } from "./LoginPrompt";
+import { AppContext } from "../../../AppContextProvider";
+import { LoginPrompt } from "../loginprompt/LoginPrompt";
 import { Navigate } from "react-router-dom";
-import AbyssClearCount from "./AbyssClearCount";
 const NewCharacter = () => {
   const [CDRB, setCDRB] = useState(0);
   const [GRRB, setGRRB] = useState(0);
@@ -78,7 +77,7 @@ const NewCharacter = () => {
         setredirect(false);
       }, 2000);
     } catch (e) {
-      console.log(e);
+      throw new Error("Error adding character error: " + e);
     }
   };
   const handleAdd = (values) => {

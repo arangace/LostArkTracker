@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./navBar.module.css";
-import { AppContext } from "../AppContextProvider";
+import { AppContext } from "../../AppContextProvider";
 export const Navbar = () => {
   const { account, setAccount } = useContext(AppContext);
 
@@ -16,7 +16,7 @@ export const Navbar = () => {
         <Link to="/">LATracker</Link>
       </h1>
       <ul className={styles["sub-nav"]}>
-        <h2>
+        <li>
           {account ? (
             <Link onClick={handleLogout} to="/">
               Logout
@@ -24,13 +24,13 @@ export const Navbar = () => {
           ) : (
             <Link to="/login">Login</Link>
           )}
-        </h2>
-        <h2>
+        </li>
+        <li>
           <Link to="/tracker">Tracker</Link>
-        </h2>
-        <h2>
+        </li>
+        <li>
           <Link to="/new">Add Character</Link>
-        </h2>
+        </li>
       </ul>
     </div>
   );

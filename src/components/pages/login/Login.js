@@ -3,17 +3,17 @@ import styles from "./login.module.css";
 import { Button, Box, TextField, Card } from "@mui/material";
 import { Formik, Form } from "formik";
 import { Navigate } from "react-router-dom";
-import { AppContext } from "../../AppContextProvider";
+import { AppContext } from "../../../AppContextProvider";
 
-export const Login = (props) => {
+export const Login = () => {
   const [userName, setUserName] = useState("");
   const { account, setAccount, url } = useContext(AppContext);
   const [signUp, setsignUp] = useState(false);
   const [signUpDetails, setSignUpDetails] = useState();
+
   const handleLogin = async () => {
     try {
       setUserName(userName.toLowerCase());
-      console.log(userName);
 
       const response = await fetch(`${url}/api/getAccount/${userName}`, {
         method: "GET",
@@ -24,25 +24,27 @@ export const Login = (props) => {
       });
 
       const data = await response.json();
+
       localStorage.setItem("currentAccount", data.id);
       setAccount(localStorage.getItem("currentAccount"));
-      console.log(`Welcome ${data.name} ID: ${data.id}`);
     } catch (e) {
       alert(`User ${userName} not found`);
-      console.log(e);
     }
   };
+
   const handleUserName = (e) => {
     e.preventDefault();
     setUserName(e.target.value);
   };
+
   const handleSignUpName = (e) => {
     e.preventDefault();
     setSignUpDetails(e.target.value);
   };
+
   const handleSignUp = async () => {
-    console.log(signUpDetails);
     let newAccount = { name: signUpDetails.toLowerCase() };
+
     try {
       await fetch(`${url}/ark/Addaccount/`, {
         method: "POST",
@@ -53,7 +55,7 @@ export const Login = (props) => {
       });
       setsignUp(true);
     } catch (e) {
-      console.log(e);
+      throw new Error("Could nto add account error: " + e);
     }
   };
   useEffect(() => {
