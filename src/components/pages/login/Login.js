@@ -105,8 +105,8 @@ export const Login = () => {
                   </Button>
                 </Form>
               </Formik>
-              {account && <Navigate to="/tracker" />}
-              {signUp && <Navigate to="/" />}
+              {account ? <Navigate to="/tracker" /> : null}
+              {signUp ? <Navigate to="/" /> : null}
             </div>
           </Card>
         </Box>

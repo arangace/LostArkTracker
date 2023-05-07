@@ -12,6 +12,10 @@ export const HomePage = () => {
             <Typography variant="h5" component="h1" gutterBottom>
               Welcome To LATracker
             </Typography>
+            <Typography sx={{ mb: 2 }} color="text.secondary">
+              APPLICATION NO LONGER SUPPORTED AS BACKEND HAS BEEN RETIRED BY THE
+              RESPECTIVE DEVELOPER
+            </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               Getting Started
             </Typography>
